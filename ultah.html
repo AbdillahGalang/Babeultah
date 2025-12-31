@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Babe!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f7dc6f);
+            background-size: 400% 400%;
+            animation: gradientShift 10s ease infinite;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 4em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: bounceIn 2s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        p {
+            font-size: 1.5em;
+            margin: 20px 0;
+            animation: fadeInUp 3s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        button {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        button:hover {
+            background: #ff3742;
+            transform: scale(1.1);
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #f7dc6f;
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background: radial-gradient(circle, #ff6b6b, #ff4757);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 20px;
+            background: #333;
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Happy Birthday, Babe 🎉</h1>
+    <p style="color: black;">🤍Semoga harinya Babe penuh kebahagiaan, cinta, dan petualangan yang tak terlupakan❤️. Babe adalah cahaya dalam hidup keluarga🥰. Semoga diberikan keberkahan dan kemudahan dalam segala urusan👌💪. Diberikan rezeki yang halal,lancar dan barokah❤️😊. Diberikan panjang umur keselamatan dunia akhirat🤲🤍! 💖</p>
+    <button id="playMusic">Play Birthday Song</button>
+    <audio id="birthdaySong" loop>
+        <!-- Ganti dengan link musik ulang tahun gratis, contoh: -->
+        <source src="./Rizkyfebian - Selamat Ulang tahun (Lyrics).mp3" type="audio/mp3">
+        <!-- Atau gunakan musik lokal: <source src="happy-birthday.mp3" type="audio/mpeg"> -->
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Tombol play musik
+        const playButton = document.getElementById('playMusic');
+        const audio = document.getElementById('birthdaySong');
+
+        playButton.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playButton.textContent = 'Pause Music';
+            } else {
+                audio.pause();
+                playButton.textContent = 'Play Birthday Song';
+            }
+        });
+
+        // Fungsi untuk membuat confetti
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDelay = Math.random() * 5 + 's';
+            confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+
+        // Fungsi untuk membuat balon
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.animationDelay = Math.random() * 6 + 's';
+            balloon.style.background = `radial-gradient(circle, hsl(${Math.random() * 360}, 100%, 70%), hsl(${Math.random() * 360}, 100%, 50%))`;
+            document.body.appendChild(balloon);
+
+            setTimeout(() => {
+                balloon.remove();
+            }, 6000);
+        }
+
+        // Mulai animasi interaktif
+        setInterval(createConfetti, 200);
+        setInterval(createBalloon, 1000);
+
+        // Klik pada halaman untuk tambah confetti
+        document.addEventListener('click', () => {
+            for (let i = 0; i < 10; i++) {
+                createConfetti();
+            }
+        });
+    </script>
+</body>
+</html>
